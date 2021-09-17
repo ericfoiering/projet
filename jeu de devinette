@@ -1,0 +1,62 @@
+"""
+Eric Foiering
+407
+16 septembre 2021
+
+jeu de devinette
+"""
+import random
+import math
+import sys
+import os
+# tu rentre les inputs
+
+print ("seulon le nombre de chiffres possibles, tu auras plus ou moins de choix")
+lower_limit = int(input("Entre le minimum:- "))
+upper_limit = int(input("Entre le maximum:- "))
+
+# were generating the rand nb that comes from 12-14
+x = random.randint(lower_limit, upper_limit)
+print("\n\tTu as seuleument ",
+	  round(math.log(upper_limit - lower_limit + 1, 2)),
+	" chances a deviner le nombre aleatoire!\n")
+
+# nb d'essais
+count = 0
+
+while count < math.log(upper_limit - lower_limit + 1, 2):
+	count += 1
+
+	# guesses as input
+	guess = int(input("Choisi un nombre:- "))
+	if x == guess:
+		print("Felicitations!!! tu la eu en ",
+			count, " essais")
+		# when u got it right the loop ends
+		break
+	elif x > guess:
+		print("trop bas!")
+	elif x < guess:
+		print("trop haut!")
+
+
+if count >= math.log(upper_limit - lower_limit + 1, 2):
+	print("\nLe nombre est %d" % x)
+	print("\tMeilleure chance la prochaine fois!")
+
+
+#here im trying fucking hard to make it start over and i dont know how help me god
+
+#ici j'ai juste cherche sur stackoverflow
+
+def restart_program():
+    """Restarts the current program.
+    Note: this function does not return. Any cleanup action (like
+    saving data) must be done before calling this function."""
+    python = sys.executable
+    os.execl(python, python, * sys.argv)
+
+if __name__ == "__main__":
+    answer = input("Do you want to restart this program ? ")
+    if answer.lower().strip() in "y yes".split():
+        restart_program()
